@@ -77,11 +77,56 @@ function receivedMessage(event) {
 		}
 	} else if (messageAttachments) {
 		sendTextMessage(senderID, "Message with attachments received");
+	} else if (event.postback) {
+		receivedPostback(event);
 	}
 }
 
 function sendGenericMessage(recipientId, messageText) {
-	// TODO
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		message: {
+			attachment: {
+				type: "template",
+				payload: {
+					template_type: "generic",
+					elements: [{
+						title: "rift",
+						subtitle: "Next-generation virtual reality",
+						item_url: "https://www.oculus.com/en-us/rift/",
+						image_url: "http://messengerdemo.parseapp.com/img/rift.png",
+						button: [{
+							type: "web_url",
+							url: "https://www.oculus.com/en-us/rift/",
+							title: "Open Web URL"
+						}, {
+							type: "postback",
+							title: "Call Postback",
+							payload: "Payload for the first bubble"
+						}]
+					}, {
+						title: "touch",
+						subtitle: "Your Hands, Now in VR",
+						item_url: "https://www.oculus.com/en-us/touch/",
+						image_url: "http://messengerdemo.parseapp.com/img/touch.png",
+						buttons: [{
+							type: "web_url",
+							url: "https://www.oculus.com/en-us/touch/",
+							title: "Open Web URL"
+						}, {
+							type: "postback",
+							title: "Call Postback",
+							payload: "Payload for second bubble"
+						}]
+					}]
+				}
+			}
+		}
+	};
+
+	callSendAPI(messageData);
 }
 
 function sendTextMessage(recipientId, messageText) {
@@ -116,6 +161,20 @@ function callSendAPI(messageData) {
 			console.error(error);
 		}
 	});
+}
+
+function recievedPostback(event) {
+	var senderID = event.sender.id;
+	var recipientID = event.recipient.id;
+	var timeOfPostback = event.timestamp;
+
+	// The 'payload' param is a developer-defined field which is set in a postback
+	// button for Structured Messages.
+	var payload = event.postback.payload;
+
+	console.log("Recieved postback for user %d and page %d with payload '%s' at %d", 
+		senderID, recipientID, payload, timeOfPostback);
+	sendTextMessage(senderID, "Postback called");
 }
 
 app.listen(app.get('port'), function() {
