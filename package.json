@@ -1,0 +1,24 @@
+{
+  "name": "soulkitchenchef",
+  "version": "1.0.0",
+  "description": "simple chat bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandemix/soulkitchenchef.git"
+  },
+  "author": "Brandon Allen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandemix/soulkitchenchef/issues"
+  },
+  "homepage": "https://github.com/brandemix/soulkitchenchef#readme",
+  "dependencies": {
+    "body-parser": "1.18.1",
+    "express": "4.15.4",
+    "request": "2.81.0"
+  }
+}
