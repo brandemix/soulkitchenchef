@@ -97,7 +97,7 @@ function sendGenericMessage(recipientId, messageText) {
 						subtitle: "Next-generation virtual reality",
 						item_url: "https://www.oculus.com/en-us/rift/",
 						image_url: "http://messengerdemo.parseapp.com/img/rift.png",
-						button: [{
+						buttons: [{
 							type: "web_url",
 							url: "https://www.oculus.com/en-us/rift/",
 							title: "Open Web URL"
